@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "course-work-4"
+version = "0.1.0"
+description = ""
+authors = ["Vlad Morozov <morozov90vlad@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.31.0"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.lint.dependencies]
+flake8 = "^6.1.0"
+black = "^23.12.0"
+isort = "^5.13.1"
+mypy = "^1.7.1"
+
+[tool.mypy]
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+exclude = '.venv'
+warn_unreachable = true
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 119
+
+[tool.isort]
+line_length = 119
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
