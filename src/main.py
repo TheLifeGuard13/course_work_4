@@ -1,13 +1,28 @@
+from classes.hh_api_class import HeadHunterAPI
+from classes.superjob_api_class import SuperJobAPI
+from src.utils import get_sj_vacancies_instances, get_hh_vacancies_instances
+
 if __name__ == '__main__':
-    pass
+    # Создание экземпляра класса для работы с API сайтов с вакансиями
+    hh_api = HeadHunterAPI()
+    superjob_api = SuperJobAPI()
 
-# Создание экземпляра класса для работы с API сайтов с вакансиями
-# hh_api = HeadHunterAPI()
-# superjob_api = SuperJobAPI()
+    # Получение вакансий с разных платформ
+    hh_vacancies = hh_api.get_vacancies("патентовед")
+    superjob_vacancies = superjob_api.get_vacancies("патентовед")
 
-# Получение вакансий с разных платформ
-# hh_vacancies = hh_api.get_vacancies("Python")
-# superjob_vacancies = superjob_api.get_vacancies("Python")
+    print(hh_vacancies)
+    print(len(hh_vacancies))
+    print(superjob_vacancies)
+    print(len(superjob_vacancies))
+
+    list_of_examples = get_hh_vacancies_instances(hh_vacancies)
+    for example in list_of_examples:
+        print(example)
+
+    list_of_examples = get_sj_vacancies_instances(superjob_vacancies)
+    for example in list_of_examples:
+        print(example)
 
 # Создание экземпляра класса для работы с вакансиями
 # vacancy = Vacancy("Python Developer", "<https://hh.ru/vacancy/123456>", "100 000-150 000 руб.", "Требования: опыт работы от 3 лет...")
