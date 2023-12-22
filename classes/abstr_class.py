@@ -9,13 +9,13 @@ class BaseAPI(ABC):
 
 class Saver(ABC):
     @abstractmethod
-    def add_vacancy(self, *args, **kwargs):
+    def add_vacancies(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def get_vacancies_by_parameters(self, *args, **kwargs):
+    def get_vacancies_by_salary(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def delete_vacancy(self, *args, **kwargs):
+    def delete_vacancies(self, *args, **kwargs):
         pass

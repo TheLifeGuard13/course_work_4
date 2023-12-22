@@ -41,9 +41,32 @@ def get_sj_vacancies_instances(vacancies: dict) -> list[Vacancy]:
                      )
     return list_
 
-# def get_executed_operations(operations: list[Operation]) -> list[Operation]:
-#     return [operation for operation in operations if operation.state == "EXECUTED"]
-#
-#
-# def sort_operation(operations: list[Operation]) -> list[Operation]:
-#     return sorted(operations, key=lambda x: x.date, reverse=True)
+
+def convert_instances_to_json(vacancies: list[Vacancy]) -> list[dict]:
+    list_ = []
+    for example in vacancies:
+        dict_ = {}
+        dict_["id вакансии"] = example.vacancy_id
+        dict_["Наименование вакансии"] = example.vacancy_name
+        dict_["Ссылка"] = example.vacancy_url
+        dict_["Требуемый опыт"] = example.experience
+        dict_["Дата размещения"] = example.vacancy_pub_date
+        dict_["Зарплата от"] = example.salary_from
+        dict_["Зарплата до"] = example.salary_limit
+        dict_["Валюта"] = example.salary_currency
+        dict_["График работы"] = example.work_schedule
+        list_.append(dict_)
+    return list_
+
+
+def sort_vacancies_by_date(vacancies: list) -> list:
+    for v in vacancies:
+        v["Дата размещения"] = datetime.strptime(v["Дата размещения"], "%d.%m.%Y")
+    sorted_vacancies = sorted(vacancies, key=lambda x: x["Дата размещения"], reverse=True)
+    for v in sorted_vacancies:
+        v["Дата размещения"] = v["Дата размещения"].strftime("%d.%m.%Y")
+    return sorted_vacancies
+
+
+def sort_vacancies_by_salary(vacancies: list) -> list:
+    return sorted(vacancies, key=lambda x: x["Зарплата от"], reverse=True)
