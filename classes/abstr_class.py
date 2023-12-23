@@ -5,6 +5,7 @@ class BaseAPI(ABC):
     """
     Абстрактный класс для работы с API
     """
+
     @abstractmethod
     def get_vacancies(self, *args, **kwargs):
         """
@@ -17,6 +18,7 @@ class Saver(ABC):
     """
     Абстрактный класс для работы с файлом json
     """
+
     @abstractmethod
     def add_vacancies(self, *args, **kwargs):
         """
