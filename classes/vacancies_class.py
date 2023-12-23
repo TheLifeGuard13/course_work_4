@@ -1,4 +1,7 @@
 class Vacancy:
+    """
+    Класс для работы с вакансиями
+    """
     def __init__(self, vacancy_id: int,
                  vacancy_url: str,
                  vacancy_pub_date: str,
@@ -20,12 +23,15 @@ class Vacancy:
         self.salary_limit = int(self.convert_net_to_gross(salary_limit))
         self.work_schedule = work_schedule
 
-    def convert_net_to_gross(self, salary):
+    def convert_net_to_gross(self, salary: int | None) -> int:
+        """
+        Конвертирует зарплату net в зарплату gross
+        """
         if salary is None:
             return 0
         elif self.salary_status:
-            return round(salary * 1.13, 2)
+            return int(salary * 1.13)
         return salary
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.vacancy_name},{self.salary_currency}, {self.salary_from}"

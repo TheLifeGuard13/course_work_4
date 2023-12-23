@@ -87,7 +87,7 @@ def user_interaction():
         y = int(input("Введите количество вакансий для вывода "))
         pprint(sort_vacancies_by_date(choisen_vacancies)[:y])
     else:
-        print("Чето не то ввел")
+        print("Неверно, запустите заново.")
         # json_saver.delete_vacancies()
         return
 

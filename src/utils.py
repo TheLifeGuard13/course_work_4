@@ -2,7 +2,10 @@ from classes.vacancies_class import Vacancy
 from datetime import datetime
 
 
-def get_hh_vacancies_instances(vacancies: dict) -> list[Vacancy]:
+def get_hh_vacancies_instances(vacancies: list[dict]) -> list[Vacancy]:
+    """
+    Инициализирует полученные вакансии HeadHunter в экземпляры Класса Vacancy
+    """
     list_ = []
     if not vacancies:
         return []
@@ -22,7 +25,10 @@ def get_hh_vacancies_instances(vacancies: dict) -> list[Vacancy]:
     return list_
 
 
-def get_sj_vacancies_instances(vacancies: dict) -> list[Vacancy]:
+def get_sj_vacancies_instances(vacancies: list[dict]) -> list[Vacancy]:
+    """
+    Инициализирует полученные вакансии SuperJob в экземпляры Класса Vacancy
+    """
     list_ = []
     if not vacancies:
         return []
@@ -43,23 +49,29 @@ def get_sj_vacancies_instances(vacancies: dict) -> list[Vacancy]:
 
 
 def convert_instances_to_json(vacancies: list[Vacancy]) -> list[dict]:
+    """
+    Конвертирует список экземпляров класса Vacancy в список словарей
+    """
     list_ = []
-    for example in vacancies:
+    for instance in vacancies:
         dict_ = {}
-        dict_["id вакансии"] = example.vacancy_id
-        dict_["Наименование вакансии"] = example.vacancy_name
-        dict_["Ссылка"] = example.vacancy_url
-        dict_["Требуемый опыт"] = example.experience
-        dict_["Дата размещения"] = example.vacancy_pub_date
-        dict_["Зарплата от"] = example.salary_from
-        dict_["Зарплата до"] = example.salary_limit
-        dict_["Валюта"] = example.salary_currency
-        dict_["График работы"] = example.work_schedule
+        dict_["id вакансии"] = instance.vacancy_id
+        dict_["Наименование вакансии"] = instance.vacancy_name
+        dict_["Ссылка"] = instance.vacancy_url
+        dict_["Требуемый опыт"] = instance.experience
+        dict_["Дата размещения"] = instance.vacancy_pub_date
+        dict_["Зарплата от"] = instance.salary_from
+        dict_["Зарплата до"] = instance.salary_limit
+        dict_["Валюта"] = instance.salary_currency
+        dict_["График работы"] = instance.work_schedule
         list_.append(dict_)
     return list_
 
 
 def sort_vacancies_by_date(vacancies: list) -> list:
+    """
+    Сортирует вакансии по дате
+    """
     for v in vacancies:
         v["Дата размещения"] = datetime.strptime(v["Дата размещения"], "%d.%m.%Y")
     sorted_vacancies = sorted(vacancies, key=lambda x: x["Дата размещения"], reverse=True)
@@ -69,4 +81,7 @@ def sort_vacancies_by_date(vacancies: list) -> list:
 
 
 def sort_vacancies_by_salary(vacancies: list) -> list:
+    """
+    Сортирует вакансии по зарплате
+    """
     return sorted(vacancies, key=lambda x: x["Зарплата от"], reverse=True)
